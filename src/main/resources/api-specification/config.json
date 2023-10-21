@@ -1,0 +1,18 @@
+{
+  "dateLibrary": "java8",
+  "library": "spring-cloud",
+  "useTags": "true",
+  "groupId": "com.monohaua",
+  "serializableModel": "true",
+  "interfaceOnly": "true",
+  "skipDefaultInterface": "true",
+  "unhandledException": "true",
+  "useSpringBoot3": "true",
+  "useBeanValidation": "true",
+  "basePackage": "com.base",
+  "modelPackage": "com.base.model",
+  "apiPackage": "com.base.api",
+  "configPackage": "com.base.configuration",
+  "additionalModelTypeAnnotations": "@lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor",
+  "useFeignClientUrl": "true"
+}

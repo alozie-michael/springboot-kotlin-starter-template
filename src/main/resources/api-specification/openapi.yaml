@@ -1,0 +1,50 @@
+openapi: 3.0.3
+info:
+  title: Base API
+  version: 1.0.0
+  contact:
+    name: Michael Alozie
+    url: https://michael.alozie.ng
+    email: michael@alozie.ng, alozienedu@gmail.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  description: >
+    Provides api operations for Base Api
+  termsOfService: https://monohaus.com/terms-of-use
+tags:
+  - name: Base
+    description: Operations using Base Api
+
+servers:
+  - url: '{protocol}://localhost:{port}'
+    variables:
+      protocol:
+        default: http
+        enum:
+          - http
+          - https
+      host:
+        default: localhost
+        enum:
+          - localhost
+          - 127.0.0.1
+      port:
+        default: 80
+        enum:
+          - 80
+          - 8080
+          - 9090
+
+paths:
+  /base:
+    $ref: 'base/base-api.yaml#/paths/~1base'
+  /base/{id}:
+    $ref: 'base/base-api.yaml#/paths/~1base~1{id}'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT  # optional, for documentation purposes only

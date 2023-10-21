@@ -1,0 +1,140 @@
+openapi: 3.0.3
+info:
+  title: Base User API
+  version: 1.0.0
+tags:
+  - name: Base User
+    description: Operations using Base Api
+
+paths:
+  /base:
+    post:
+      tags:
+        - Base User
+      summary: Create Base User
+      operationId: createBaseUser
+      security:
+        - BearerAuth: [ ]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'base-dto.yaml#/components/schemas/BaseUserDto'
+        required: true
+      responses:
+        201:
+          description: Base User created
+          content:
+            application/json:
+              schema:
+                $ref: 'base-dto.yaml#/components/schemas/BaseIdResponse'
+        401:
+          $ref: '../response-dto.yaml#/components/responses/401'
+        403:
+          $ref: '../response-dto.yaml#/components/responses/403'
+        404:
+          $ref: '../response-dto.yaml#/components/responses/404'
+        500:
+          $ref: '../response-dto.yaml#/components/responses/500'
+
+    get:
+      tags:
+        - Base User
+      summary: Get
+      operationId: getBaseUsers
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - in: query
+          name: page
+          description: Current Page Index
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: pageSize
+          description: Max count of items on a page
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: email
+          in: query
+          description: Base user email
+          schema:
+            type: string
+      responses:
+        200:
+          description: Base Users
+          content:
+            application/json:
+              schema:
+                $ref: 'base-dto.yaml#/components/schemas/BaseUserDtoPage'
+        401:
+          $ref: '../response-dto.yaml#/components/responses/401'
+        403:
+          $ref: '../response-dto.yaml#/components/responses/403'
+        404:
+          $ref: '../response-dto.yaml#/components/responses/404'
+        500:
+          $ref: '../response-dto.yaml#/components/responses/500'
+
+  /base/{id}:
+    get:
+      tags:
+          - Base User
+      summary: Get Base User by id
+      operationId: getBaseUserById
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - name: id
+          in: path
+          description: Base user id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        200:
+          description: Base User
+          content:
+            application/json:
+              schema:
+                $ref: 'base-dto.yaml#/components/schemas/BaseUserDto'
+        401:
+          $ref: '../response-dto.yaml#/components/responses/401'
+        403:
+          $ref: '../response-dto.yaml#/components/responses/403'
+        404:
+          $ref: '../response-dto.yaml#/components/responses/404'
+        500:
+          $ref: '../response-dto.yaml#/components/responses/500'
+
+    delete:
+      tags:
+        - Base User
+      summary: Delete Base User by id
+      operationId: deleteBaseUserById
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - name: id
+          in: path
+          description: Base user id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        204:
+          description: Base User deleted
+        401:
+          $ref: '../response-dto.yaml#/components/responses/401'
+        403:
+          $ref: '../response-dto.yaml#/components/responses/403'
+        404:
+          $ref: '../response-dto.yaml#/components/responses/404'
+        500:
+          $ref: '../response-dto.yaml#/components/responses/500'

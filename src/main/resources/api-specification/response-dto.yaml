@@ -1,0 +1,53 @@
+openapi: 3.0.3
+info:
+  title: Base API
+  version: 1.0.0
+
+paths: { }
+components:
+
+  schemas:
+    ErrorResponse:
+      type: object
+      required:
+        - timestamp
+        - status
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          type: string
+        message:
+          type: string
+        debugMessage:
+          type: string
+
+  responses:
+    204:
+      description: Successful
+
+    401:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    404:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    500:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'

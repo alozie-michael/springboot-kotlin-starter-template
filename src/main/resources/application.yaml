@@ -1,0 +1,45 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: base-service
+  profiles:
+    active: ${ENV:default}
+  datasource:
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    port: ${DB_PORT:5432}
+    host: ${DB_HOST:localhost}
+    database-name: ${DB_NAME:postgres}
+    driver-class-name: org.postgresql.Driver
+    schema-name: base
+    url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.database-name}?currentSchema=${spring.datasource.schema-name},public
+    hikari:
+      schema: ${spring.datasource.schema-name}
+  jpa:
+    database: postgresql
+    generate-ddl: false
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: none # none for production
+    properties:
+      hibernate:
+        format-sql: true
+        default_schema: "`${spring.datasource.schema-name}`"
+  flyway:
+    baseline-on-migrate: true
+    enabled: true
+    locations: classpath:db/migration
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    default-schema: ${spring.datasource.schema-name}
+    schemas:
+      - ${spring.datasource.schema-name}
+
+logging:
+  level:
+    root: INFO
+

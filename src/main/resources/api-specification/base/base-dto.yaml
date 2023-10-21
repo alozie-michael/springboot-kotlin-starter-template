@@ -1,0 +1,67 @@
+openapi: 3.0.3
+info:
+  title: Base API
+  version: 1.0.0
+tags:
+  - name: Base
+    description: Operations using Base Api
+
+paths: { }
+components:
+  schemas:
+    BaseUserDto:
+      type: object
+      required:
+        - name
+        - email
+        - password
+        - roles
+        - active
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        active:
+          type: boolean
+          default: false
+
+    BaseIdResponse:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          format: uuid
+
+    BaseUserDtoPage:
+      type: object
+      required:
+        - page
+        - pageSize
+        - totalPages
+        - totalElements
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseUserDto'
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int32
+        page:
+          type: integer
+          format: int32
